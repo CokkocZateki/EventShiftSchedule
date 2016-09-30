@@ -28,17 +28,17 @@ class NoEventTest(hyp_TestCase):
             "time": time,
             "position": position
         })
-        response_opt_enter = self.client.post(reverse('EventShiftSchedule:enter_otp'), {
-            "checked": checked,
-            "time": time,
-            "position": position
-        })
+        #response_opt_enter = self.client.post(reverse('EventShiftSchedule:enter_otp'), {
+        #    "checked": checked,
+        #    "time": time,
+        #    "position": position
+        #})
         assert response_enter.status_code != status_code
-        assert response_opt_enter.status_code != status_code
+        #assert response_opt_enter.status_code != status_code
         #self.user.delete()
 
     def test_enter_no_500(self):
-       self.post_enter(status_code=500)
+       self.post_enter(checked=True,status_code=500)
 
     def test_shift_schedule_no_500(self):
         response = self.client.get(reverse('EventShiftSchedule:shift_schedule'))
