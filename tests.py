@@ -35,7 +35,7 @@ class NoEventTest(hyp_TestCase):
         })
         assert response_enter.status_code != status_code
         assert response_opt_enter.status_code != status_code
-        self.user.delete()
+        #self.user.delete()
 
     def test_enter_no_500(self):
        self.post_enter(status_code=500)
