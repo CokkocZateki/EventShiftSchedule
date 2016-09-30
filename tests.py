@@ -38,7 +38,7 @@ class NoEventTest(hyp_TestCase):
         #self.user.delete()
 
     def test_enter_no_500(self):
-       self.post_enter(checked=True,status_code=500)
+       self.post_enter(status_code=500)
 
     def test_shift_schedule_no_500(self):
         response = self.client.get(reverse('EventShiftSchedule:shift_schedule'))
