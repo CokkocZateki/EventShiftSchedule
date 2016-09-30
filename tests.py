@@ -36,31 +36,9 @@ class NoEventTest(hyp_TestCase):
         assert response_opt_enter.status_code != status_code
         self.user.delete()
 
-    def test_enter_no_500(self):
-        self.post_enter(status_code=500)
+    #def test_enter_no_500(self):
+    #   self.post_enter(status_code=500)
 
     def test_shift_schedule_no_500(self):
         response = self.client.get(reverse('EventShiftSchedule:shift_schedule'))
         assert response.status_code != 500
-
-
-class AddCommentTest(hyp_TestCase):
-    from EventShiftSchedule.views import add_comment
-
-    def setUp(self):
-        self.client = Client()
-
-    @given(comment=text(), event_id=integers(min_value=0, max_value=2**31-1))
-    def test_add_comment_500(self, comment, event_id):
-        self.user = hyp_models(User, last_login=dates(), date_joined=dates(), email=just('')).example()
-        self.event = hyp_models(Event, date=dates()).example()
-        self.client.force_login(self.user, backend=settings.AUTHENTICATION_BACKENDS[0])
-
-        response = self.client.post(reverse('EventShiftSchedule:comment'), {
-            'value': comment,
-            'event_id': event_id
-        })
-
-        assert response.status_code != 500
-
-        self.user.delete()
