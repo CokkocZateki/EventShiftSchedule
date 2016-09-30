@@ -60,6 +60,7 @@ def enter(request):
     if request.method == 'POST':
         post = request.POST
         checked = post['checked'] == 'true'
+        print(post)
         try:
             next_event = Event.objects.earliest().id
             time = Time.objects.get(id=post['time'], event=next_event)
