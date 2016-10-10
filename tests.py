@@ -15,13 +15,16 @@ from InphimaHelperCoordinator import settings  # FIXME: This doesn't work with a
 
 class NoEventTest(hyp_TestCase):
 
+    def setUp(self):
+        self.client = Client()
+
     @given(checked=booleans(),
            time=integers(min_value=0, max_value=2**31-1),
            position=integers(min_value=0, max_value=2**31-1))
     def post_enter(self, status_code, checked, time, position):
         self.user = User.objects.create(username="John", password="abc")
         #self.user = hyp_models(User, last_login=just("2099-12-31"), date_joined=just("2099-12-31")).example()
-        self.client = Client()
+
         self.client.force_login(self.user, backend=settings.AUTHENTICATION_BACKENDS[0])
         response_enter = self.client.post(reverse('EventShiftSchedule:enter'), {
             "checked": checked,
