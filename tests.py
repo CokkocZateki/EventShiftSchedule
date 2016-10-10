@@ -20,6 +20,9 @@ class NoEventTest(hyp_TestCase):
         self.user = User.objects.create(username="John", password="abc")
         self.client.force_login(self.user, backend=settings.AUTHENTICATION_BACKENDS[0])
 
+    def tearDown(self):
+        self.user.delete()
+
     @given(checked=booleans(),
            time=integers(min_value=0, max_value=2**31-1),
            position=integers(min_value=0, max_value=2**31-1))
